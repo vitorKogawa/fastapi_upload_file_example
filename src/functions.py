@@ -5,30 +5,11 @@ import datetime
 from cryptography.fernet import Fernet
 
 
-def fileExistsInRoot(filename):
-    if os.path.exists(f'./{filename}'):
-        return True
-    else: 
-        return False
-    
-def removeFileInRoot(filename):
-    if fileExistsInRoot(filename):
-        os.remove(f'{filename}')
-        return True
-    else:
-        return False
-    
-def moveFile(filename):
-    if fileExistsInRoot(filename):
-        shutil.move(f'./{filename}', f'./img/{filename}')
-        removeFileInRoot(filename)
-        return True
-    else:
-        return False
+def path(filepath): 
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), filepath)
 
 def encryptFilename(originalFilename: str):
     print(originalFilename)
-    print(originalFilename.split('.')[1])
     
     key = Fernet.generate_key()
     f = Fernet(key)
